@@ -5,32 +5,27 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use http\Client\Request;
-use http\Client\Response;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     /**
-     * @param Request $request
-     * @return Response
+     * @param FormRequest $request
+     * @return JsonResponse
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(FormRequest $request): JsonResponse
     {
         $email = $request->email;
         $password = $request->password;
 
-        $user = User::query()->where('email', $email)->first();
+        $loggedIn = Auth::attempt([
+            'email' => $email,
+            'password' => $password,
+        ], remember: true);
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Invalid credentials',
-            ], 401);
-        }
-
-        $passwordMatch = password_verify($password, $user->password);
-
-        if (!$passwordMatch) {
+        if (!$loggedIn) {
             return response()->json([
                 'message' => 'Invalid credentials',
             ], 401);

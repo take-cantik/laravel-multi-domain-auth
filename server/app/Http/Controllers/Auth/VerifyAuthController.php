@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use http\Client\Response;
 
 class VerifyAuthController extends Controller
 {
     /**
-     * @return Response
+     * @return JsonResponse
      */
-    public function __invoke(): Response
+    public function __invoke(): JsonResponse
     {
-        $loggedIn = Auth::check();
+        $loggedIn = Auth::guard('default')->check();
 
         if (!$loggedIn) {
             return response()->json([
