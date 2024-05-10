@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\VerifyAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/health-check', fn () => 'ok');
 
+Route::post('/login', LoginController::class);
+Route::post('/signup', SignUpController::class);
+Route::get('/verify-auth', VerifyAuthController::class);
