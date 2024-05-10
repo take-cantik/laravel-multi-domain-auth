@@ -38,7 +38,7 @@ return [
     'guards' => [
         'default' => [
             'driver' => 'session',
-            'provider' => 'users'
+            'provider' => 'user'
         ]
 
         // 'web' => [
@@ -70,9 +70,9 @@ return [
         //     'model' => App\Models\User::class,
         // ],
 
-        'users' => [
+        'user' => [
             'driver' => 'database',
-            'table' => 'users',
+            'table' => 'user',
         ],
     ],
 
