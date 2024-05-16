@@ -48,12 +48,26 @@ function App() {
     }
   }
 
+  const healthCheck = async () => {
+    try {
+      await fetch('https://take-cantik.local/api/health-check', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       <div>
         <button onClick={signUp} className="button">sign up</button>
         <button onClick={login} className="button">login</button>
         <button onClick={checkAuth} className="button">check auth</button>
+        <button onClick={healthCheck} className="button">health check</button>
       </div>
     </>
   )
