@@ -15,7 +15,7 @@ class VerifyAuthController extends Controller
      */
     public function __invoke(): JsonResponse
     {
-        $loggedIn = Auth::guard('default')->check();
+        $loggedIn = Auth::check();
 
         if (!$loggedIn) {
             return response()->json([

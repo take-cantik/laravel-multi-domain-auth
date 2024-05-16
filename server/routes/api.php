@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/health-check', fn () => 'ok');
+Route::middleware('auth:sanctum')->get('/health-check', fn () => 'ok');
 
 Route::post('/login', \App\Http\Controllers\Auth\LoginController::class);
 Route::post('/signup', \App\Http\Controllers\Auth\SignUpController::class);

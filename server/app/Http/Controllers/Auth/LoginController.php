@@ -31,6 +31,8 @@ class LoginController extends Controller
             ], 401);
         }
 
+        $request->session()->regenerate();
+
         return response()->json([
             'message' => 'User logged in successfully',
         ], 201);
